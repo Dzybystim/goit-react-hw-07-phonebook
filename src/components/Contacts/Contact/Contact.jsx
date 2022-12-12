@@ -1,19 +1,19 @@
-import { useDispatch } from "react-redux";
-import { deleteContacts } from "../../../redux/contactsSlice"
 import { ContactStyled, ContactStyledButton } from "./Contact.styled"
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../../redux/operations"
 import PropTypes from 'prop-types';
 
 
 export default function Contact({contact}) {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(deleteContacts(contact.id))
+        dispatch(deleteContact(contact.id))
     }
     
     return <ContactStyled>
-            <p>{contact.text}: {contact.tel}</p>
+            <p>{contact.name}: {contact.phone}</p>
             <ContactStyledButton type="button" onClick={handleClick} > Delete</ContactStyledButton>
            </ContactStyled>
     
@@ -22,7 +22,7 @@ export default function Contact({contact}) {
 Contact.propTypes = {
     contact: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        tel: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
       }) 
 }

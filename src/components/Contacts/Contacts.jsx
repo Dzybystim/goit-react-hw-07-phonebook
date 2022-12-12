@@ -1,22 +1,21 @@
 import { useSelector } from "react-redux";
-import {getContacts, getFilter} from "../../redux/selectors"
+import {selectContacts, selectFilter} from "../../redux/selectors"
 import {ContactsStyled} from "./Contacts.styled"
 
 import Contact from "./Contact/Contact"
 
 const getVisibleContacts = (contacts, filterNormalize) => {
-   return contacts.value.filter(contact => {  
-    return contact.text.toLowerCase().includes(filterNormalize)})
+   return contacts.filter(contact => {  
+    return contact.name.toLowerCase().includes(filterNormalize)})
 }
 
 
 export default function Contacts() {
 
-const contacts = useSelector(getContacts)
+const contacts = useSelector(selectContacts)
+const filter = useSelector(selectFilter)
 
-const filter = useSelector(getFilter)
 const normalize = filter.toLowerCase()
-
 
 const visibleContacts = getVisibleContacts(contacts, normalize)
 

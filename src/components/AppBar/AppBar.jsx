@@ -1,18 +1,19 @@
-import { useDispatch, useSelector } from "react-redux"
-import { addContact } from "../../redux/contactsSlice"
-import {getContacts} from "../../redux/selectors"
+import { useSelector, useDispatch } from "react-redux"
+import {selectContacts} from "../../redux/selectors"
 import PropTypes from 'prop-types';
-
 import {AppBarStyled, AppBarSpanStyled, AppBarStyledInput, AppBarStyledButton} from './AppBar.styled'
+import {addContact} from "../../redux/operations"
+
+
+
 
 export default function AppBar({title, titleInputOne, titleInputTwo}) {
 
     const dispatch = useDispatch();
-
-    const contacts = useSelector(getContacts)
+    const contacts = useSelector(selectContacts);
 
     const check = (nameContact) => {
-     const checkBoolean = contacts.value.find(contact => contact.text === nameContact)
+     const checkBoolean = contacts.find(contact => contact.name === nameContact)
      return checkBoolean
     }
 
@@ -23,7 +24,8 @@ export default function AppBar({title, titleInputOne, titleInputTwo}) {
         if(checkBoolean){
             return alert(`${event.target.elements.name.value} is already in contacts`)
         } else {
-        dispatch(addContact(event.target.elements.name.value, event.target.elements.number.value))}
+            dispatch(addContact({name: event.target.elements.name.value, phone: event.target.elements.number.value}))
+        }
         event.target.reset()
     }
 

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
-import { setStatusFilter } from "../../redux/filterSlice"
 import {FilterStyled} from "./Filter.styled"
+import {setStatusFilter} from "../../redux/filterSlice"
 import PropTypes from 'prop-types';
 
 export default function Filter({title, titleInput}) {
